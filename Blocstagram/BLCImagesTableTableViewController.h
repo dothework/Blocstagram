@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImagesTableTableViewController : UITableViewController
-
-@property (nonatomic, strong) NSMutableArray *images;
+@interface BLCImagesTableTableViewController : UITableViewController
 
 @end

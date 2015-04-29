@@ -6,20 +6,24 @@
 //  Copyright (c) 2015 Mark Carpenter. All rights reserved.
 //
 
-#import "ImagesTableTableViewController.h"
+#import "BLCImagesTableTableViewController.h"
 
-@interface ImagesTableTableViewController ()
+#import "BLCDataSource.h"
+#import "BLCMedia.h"
+#import "BLCUser.h"
+#import "BLCComment.h"
+
+@interface BLCImagesTableTableViewController ()
 
 @end
 
-@implementation ImagesTableTableViewController
+@implementation BLCImagesTableTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.images = [NSMutableArray array];
         
     }
     return self;
@@ -33,14 +37,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    for (int i = 1; i <= 10; i++) {
-        NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
-        UIImage *image = [UIImage imageNamed:imageName];
-        if (image) {
-            [self.images addObject:image];
-        }
-    }
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"imageCell"];
 }
@@ -63,7 +59,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.images.count;
+    return [BLCDataSource sharedInstance].mediaItems.count;;
 }
 
 
@@ -90,8 +86,8 @@
         [cell.contentView addSubview:imageView];
     }
     
-    UIImage *image = self.images[indexPath.row];
-    imageView.image = image;
+    BLCMedia *item = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+    imageView.image = item.image;
     
     return cell;
 }
@@ -102,7 +98,9 @@
     //UIImage *image = self.images[indexPath.row];
     //return image.size.height;
     
-    UIImage *image = self.images[indexPath.row];
+    BLCMedia *item = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+    UIImage *image = item.image;
+    
     return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
 }
 
