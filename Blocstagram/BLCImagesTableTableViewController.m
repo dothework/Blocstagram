@@ -83,7 +83,7 @@
     //return image.size.height;
     
     BLCMedia *item = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
-    UIImage *image = item.image;
+    //UIImage *image = item.image;
     //return 300 + image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
     return [BLCMediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
 }
